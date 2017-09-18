@@ -1,2 +1,30 @@
 # Chess
-Chess
+
+
+Description
+  Project for programming 2 class.
+  Its a basic chess game designed for the terminal.
+  It only provides user vs user gameplay.
+  It also provides a history setting in which one can backtrack to any previous play
+  Rules are the same as the board game
+  
+  
+ Instructions:
+  1. In order to play one must select the position of the piece first
+  2. Then one must select the desired postion to move
+  3. The program will offer all possible moves for the piece in order to make it easier for inexperienced players 
+  4. The game ends when there are no more possible moves, or when checkmate occurs
+  
+ Peon al paso
+ 
+ Check
+ 
+ CheckMate
+ 
+ Castle
+ 
+ Taking a piece 
+ 
+ Power pawn
+ 
+ 
