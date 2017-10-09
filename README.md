@@ -26,4 +26,6 @@
  <br/>
 
 ### Peon al paso &Taking a piece
+
   <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" width="380"/>
+
