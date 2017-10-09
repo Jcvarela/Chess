@@ -1,7 +1,7 @@
 # Chess
 
 
-Description
+### Description:
   Project for programming 2 class.
   It’s a basic chess game designed for the terminal.
   It only provides user vs user gameplay.
@@ -9,30 +9,33 @@ Description
   Rules are the same as the board game
   
   
- Instructions:
+ ### Instructions:
   1. In order to play one must select the position of the piece first
   2. Then one must select the desired position to move
   3. The program will offer all possible moves for the piece in order to make it easier for inexperienced players 
   4. The game ends when there are no more possible moves, or when checkmate occurs
- 
- <div align="left" width="400" >
-   <h3>Peon al paso &Taking a piece </h3>
-   <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" width="400"/>
- </div>
- 
- <div align="right" width="400" >
-   <h3> Other </h3>
-    <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="right"  width="400"/>
- </div>
- 
-
- 
- 
- 
- Check
+  
+  Check
  
  CheckMate
  
  Castle
  
  Power pawn
+ 
+ 
+ <div align="left" width="400" >
+   <h3>Peon al paso &Taking a piece </h3>
+   <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" width="380"/>
+ </div>
+ 
+ <div align="right" width="400" >
+   <h3> Other </h3>
+    <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="right"  width="380"/>
+ </div>
+ 
+
+ 
+ 
+ 
+
