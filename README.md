@@ -23,16 +23,17 @@
  
  Power pawn
  
- 
- <div align="left" width="400" >
-   <h3>Peon al paso &Taking a piece </h3>
+ <br/>
+
+ <!--<div align="left" width="400" >-->
+  <!--<h3>Peon al paso & Taking a piece </h3>-->
    <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" width="380"/>
- </div>
+
  
- <div align="right" width="400" >
-   <h3> Other </h3>
+ <!--<div align="right" width="400" >-->
+   <!--<h3 align="right"> Other </h3>-->
     <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="right"  width="380"/>
- </div>
+
  
 
  
