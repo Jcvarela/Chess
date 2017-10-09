@@ -17,7 +17,7 @@ Description
   
  Peon al paso
  Taking a piece
- ![](https://github.com/Jcvarela/Chess/blob/master/images/finish.gif | width=100)
+ ![](https://github.com/Jcvarela/Chess/blob/master/images/finish.gif)
  
  Check
  
