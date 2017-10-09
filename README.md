@@ -16,9 +16,10 @@ Description
   4. The game ends when there are no more possible moves, or when checkmate occurs
   
  Peon al paso
- Taking a piece
- ![](https://github.com/Jcvarela/Chess/blob/master/images/finish.gif)
  
+ Taking a piece
+ 
+ <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" height="500"/>
  Check
  
  CheckMate
