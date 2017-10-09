@@ -14,12 +14,21 @@ Description
   2. Then one must select the desired position to move
   3. The program will offer all possible moves for the piece in order to make it easier for inexperienced players 
   4. The game ends when there are no more possible moves, or when checkmate occurs
-  
- Peon al paso
  
- Taking a piece
+ <div align="left" width="400" >
+   <h3>Peon al paso &Taking a piece </h3>
+   <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" width="400"/>
+ </div>
  
- <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" height="500"/>
+ <div align="right" width="400" >
+   <h3> Other </h3>
+    <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="right"  width="400"/>
+ </div>
+ 
+
+ 
+ 
+ 
  Check
  
  CheckMate
