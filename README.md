@@ -33,7 +33,7 @@
   - white from e5 to e4
   - black from d2 to d4
   - white from e4 to f3 eat pawn
-  - go back in history
+  - go back to previous move
   - white from e4 to d3 en passant
   
   
