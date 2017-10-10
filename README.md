@@ -25,7 +25,16 @@
  
  <br/>
 
-### Peon al paso &Taking a piece
+### En Passant & Taking a piece
 
-  <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="left" width="380"/>
+  <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="right" width="380"/>
+  
+  Moves
+  - white from e5 to e4
+  - black from d2 to d4
+  - white from e4 to f3 eat pawn
+  - go back in history
+  - white from e4 to d3 en passant
+  
+  
 
