@@ -27,7 +27,7 @@
 
 ### En Passant & Taking a piece
 
-  <img src="https://github.com/Jcvarela/Chess/blob/master/images/finish.gif" align="right" width="380"/>
+  <img src="https://github.com/Jcvarela/Chess/blob/master/images/En%20passant%20%26%20taking%20a%20piece.gif" align="right" width="380"/>
   
   Moves
   - white from e5 to e4
