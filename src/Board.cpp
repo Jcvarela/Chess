@@ -22,11 +22,11 @@ bool Board::playerOneTurn = true;
 Block** Board::block = new Block*[8];
 
 //keeps track of king position and last one of how many time it move
-int Board::wKing[] = { 7, 4,0 }; 
+int Board::wKing[] = { 7, 4,0 };
 int Board::white_left_rook[] = { 0, 0, 0 };
 int Board::white_right_rook[] = { 0, 0, 0 };
 
-int Board::bKing[] = { 0, 4,0 }; 
+int Board::bKing[] = { 0, 4,0 };
 int Board::black_left_rook[] = { 0, 0, 0 };
 int Board::black_right_rook[] = { 0, 0, 0 };
 
@@ -34,12 +34,15 @@ std::vector<std::string> Board::history;
 
 //constroctor
 Board::Board(){
+}
+
+void Board::InitializeBoard(){
 
 	Block **b = new Block*[8];
 
 	bool isColor1 = true;
 	for(int i = 0; i < 8; i++){
-		
+
 		b[i] = new Block[8];
 
 		for(int j = 0; j < 8; j++){
@@ -114,13 +117,12 @@ Board::Board(){
 	wKing[2] = 0;// how many has move
 
 
-	history.clear();
-	
-	delete block;
+
+
+	delete[] block;
 	block =  b;
 
-	this->playerOneTurn = true;
-
+	playerOneTurn = true;
 }
 
 
@@ -129,7 +131,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 	//keep track of the position of the king if it change
 	if (block[frow][fcol].getUnit()->getName().at(1) == 'K'){
-		
+
 		int value = fcol - tcol;
 
 		if (block[frow][fcol].getUnit()->getName().at(0) == 'W'){
@@ -166,7 +168,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 	//keeps track of the position of the rook if it change
 	if (block[frow][fcol].getUnit()->getName().at(1) == 'R'){
-		
+
 		if (frow == white_left_rook[0] && fcol == white_left_rook[1]){
 			white_left_rook[0] = trow;
 			white_left_rook[1] = tcol;
@@ -194,10 +196,10 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 	block[trow][tcol].setUnit(*block[frow][fcol].getUnit()); //chenges the board
 	block[trow][tcol].getUnit()->changePosition(trow,tcol); // changes the position of units
 	block[frow][fcol].setUnit(); //delete unit
-	
+
 	return true;
 }
-  
+
 
 //check if block at postion row, col is been attack by enemy untis
  bool Board::beingAttacked(int row, int col){
@@ -223,13 +225,13 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 
 	 //this is going to to check the positions where a block can be attacked, spcifically by a turret, pawn, queen, bishop
-	 for (int i = 0; i < 16; i+=2){		
+	 for (int i = 0; i < 16; i+=2){
 		 for (int j = 1; j < 8; j++){
 			 int k = arrays[i] * j + row;
 			 int p = arrays[i + 1] * j + col;
 
 				if (!Unit::isOutBounds(k, p)){
-					 
+
 					if (board[k][p].ithasUnit()){
 
 						if (board[k][p].getUnit()->isItWhite() != playerOneTurn){
@@ -237,23 +239,23 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 							if (check){
 								return check;
 							}
-						} 
-						
+						}
+
 						break;
-						
-					} 
+
+					}
 					else {
 						continue;
 					}
 
 				}
-				else { //is out of bound 
+				else { //is out of bound
 					break;
 				}
 		 }
 	 }
 	 return check;
-}	
+}
  //checks which element is attacking and returns if there is an element that can attack the block
  bool Board::piecesWhat(int row, int col, int row2, int col2){
 
@@ -281,7 +283,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 	 case 'P':
 		 //find a way check for both pawns
-		 mult = (block[row2][col2].getUnit()->isItWhite()? -1 : 1); 
+		 mult = (block[row2][col2].getUnit()->isItWhite()? -1 : 1);
 
 		 if ( (row - row2)*mult  == 1 && ( col + 1 == col2  || col - 1 == col2) ){
 			 check = true;
@@ -322,14 +324,14 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 		 std::ostringstream num;
 		 num << i;
 		 value += "\t\t\t" + num.str() + ": ";
-		 
+
 		 extra = history[history.size() - i];
-		 
+
 
 
 		 switch(extra.at(0)){
 		 case '1': //it move
-			 
+
 			 positionFrom = (char)('A' + (extra.at(2) - '0'));
 			 positionFrom += (char)('1' + (extra.at(1) - '0'));
 			 positionTo = (char)('A' + (extra.at(4) - '0'));
@@ -337,7 +339,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 			 value += "Move " + extra.substr(5,2) +" from " + positionFrom + " to " + positionTo;
 			 break;
-			 
+
 		 case '2': //it attack
 
 			 positionFrom = (char)('A' + (extra.at(2) - '0'));
@@ -347,7 +349,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 			 value += "Attack " + extra.substr(7, 2) + " at " + positionTo + " from " + positionFrom + " with "+ extra.substr(5,2);
 			 break;
-			 
+
 		 case '3': //Castling
 
 			 value += "Castling " + extra.substr(5, 2) + " to " + ((extra.at(4) > extra.at(2)) ? "right": "left");
@@ -386,11 +388,11 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
  void Board::addHistory(int frow, int fcol, int trow, int  tcol){
 	 std::string h = "";
 	 std::ostringstream num;
-	 
+
 
 
 	 if (block[trow][tcol].ithasUnit()){
-		 h = "2"; // means its eating 
+		 h = "2"; // means its eating
 	 }
 	 else {
 
@@ -408,7 +410,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 		 }
 
 	}
-	 
+
 	 if (h.compare("5") == 0){
 
 		 num << frow << fcol << trow << tcol << block[frow][fcol].getUnit()->getName() + block[frow][tcol].getUnit()->getName() << frow << tcol;
@@ -417,7 +419,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 	 }
 	 else {
-		
+
 		 num << frow << fcol << trow << tcol;
 		 h += num.str() + block[frow][fcol].getUnit()->getName();
 
@@ -433,7 +435,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 
  bool Board::goback(){
-	
+
 	 if (history.size() == 0){
 		 return false;
 	 }
@@ -450,17 +452,17 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 			 fcol = extra.at(4) - '0';
 			 trow = extra.at(1) - '0';
 			 tcol = extra.at(2) - '0';
-		 
+
 			 moveTo(frow, fcol, trow, tcol);
 
 			 if (block[trow][tcol].getUnit()->getName().at(1) == 'K'){
-				
+
 				 if (block[trow][tcol].getUnit()->getName().at(0) == 'W'){  wKing[2] -= 2;	 }
 				 else { bKing[2] -= 2; }
-				 
+
 			 }
 			 else if (block[trow][tcol].getUnit()->getName().at(1) == 'R'){
-				
+
 				 if (block[trow][tcol].getUnit()->getName().at(0) == 'W'){
 					 if (trow == white_left_rook[0] && tcol == white_left_rook[1]){ white_left_rook[2] -= 2; }
 					 else { white_right_rook[2] -= 2; }
@@ -473,7 +475,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 			 }
 
 			 break;
-			 
+
 		 case '2': //EATING
 
 			 frow = extra.at(3) - '0';
@@ -517,8 +519,8 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 			 if (fcol > tcol){ //right
 				 moveTo(trow, tcol + 1, trow, 7); //move rook first
-				 
-				 moveTo(frow, fcol, frow, fcol - 1); //move king 
+
+				 moveTo(frow, fcol, frow, fcol - 1); //move king
 				 moveTo(frow, fcol - 1, trow, tcol);
 
 				 if (block[trow][tcol].getUnit()->isItWhite()){
@@ -534,8 +536,8 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 			 }
 			 else { //left
 				 moveTo(trow,tcol - 1,trow,0);
-				
-				 moveTo(frow, fcol, frow, fcol + 1); //move king 
+
+				 moveTo(frow, fcol, frow, fcol + 1); //move king
 				 moveTo(frow, fcol + 1, trow, tcol);
 
 
@@ -555,11 +557,11 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 			 frow = extra.at(3) - '0';
 			 fcol = extra.at(4) - '0';
 
-			 block[frow][fcol].setUnit( block[frow][fcol].getUnit()->getName().substr(0,1) + "P" ); //set the value at that position back to Peon 
+			 block[frow][fcol].setUnit( block[frow][fcol].getUnit()->getName().substr(0,1) + "P" ); //set the value at that position back to Peon
 			 goback(); //make peon go back
 
 			 break;
-			 
+
 		 case '5':
 
 			 frow = extra.at(3) - '0';
@@ -568,7 +570,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 			 tcol = extra.at(2) - '0';
 
 			 moveTo(frow, fcol, trow, tcol);
-			 
+
 			 block[trow][fcol].setUnit(block[trow][tcol].getUnit()->isItWhite()? "BP":"WP");
 
 
@@ -584,14 +586,14 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 
  bool Board::isYourKingBeenAttack(){
-	
+
 	 if (playerOneTurn){
 		 return beingAttacked(wKing[0], wKing[1]);
 	 }
 	 else {
 		 return beingAttacked(bKing[0],bKing[1]);
 	 }
-	
+
  }
 
 
@@ -601,17 +603,17 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 	 bool check = false;
 
 	 if (block[row][col].ithasUnit()){
-		
+
 		 if (block[row][col].getUnit()->isItWhite() != playerOneTurn){
 
 			 block[row][col].getUnit()->setIsItWhite(playerOneTurn);
 			 check = !isYourKingBeenAttack();
 			 block[row][col].getUnit()->setIsItWhite(!playerOneTurn);
 		 }
-		
+
 	 }
 	 else {
-		
+
 		 block[row][col].setUnit(Unit(row,col,playerOneTurn));
 		 check = !isYourKingBeenAttack();
 		 block[row][col].setItHasUnit(false);
@@ -622,23 +624,23 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
  }
 
  bool Board::checkIfPlayerHaveMovement(){
-	 
+
 
 	 //go by all the entire board looking for units that belong to current player
 	 //if it find that a unit can make a possible movement return true
-	 for (int i = 0; i < 8; i++){	 
+	 for (int i = 0; i < 8; i++){
 		 for (int j = 0; j < 8; j++){
-		 
+
 			 // theres a unit in this specific block and it belong to current player
 			 if (block[i][j].ithasUnit() && block[i][j].getUnit()->isItWhite() == playerOneTurn){
-				 
-				 if (block[i][j].getUnit()->canMove().size() > 0){ 
+
+				 if (block[i][j].getUnit()->canMove().size() > 0){
 					 return true; // unit at block i,j has possible movements
 				 }
 			 }
-		 
+
 		 }
-	 
+
 	 }
 
 	 //return false if didnt found a unit that could move
@@ -652,7 +654,7 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 	 value += "      A      B      C      D      E      F      G      H   \n";
 
-	 for (int i = 0; i < 8; i++){				// 
+	 for (int i = 0; i < 8; i++){				//
 
 		 value += "    ------ ------ ------ ------ ------ ------ ------ ------\n";
 		 for (int j2 = 0; j2 < 3; j2++){
@@ -722,9 +724,9 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
  }
 
  bool Board::rook_at_pos_move(int row, int col){
-	 
+
 	 bool check = true;
-	 
+
 	 if (block[row][col].getUnit()->getName().at(1) != 'R')
 		 return true;
 
@@ -746,19 +748,19 @@ bool Board::moveTo(int frow,int fcol, int trow,int  tcol){
 
 
  void Board::setPromotion(std::string name){
-	 
+
 	 std::string before = history[history.size() -1];
 	 int row = before.at(3) - '0';
 	 int col = before.at(4) - '0';
-	 
+
 	 if (before.at(0) > '2')
 		 return;
 
 
 	 if (block[row][col].getUnit()->getName().at(1) == 'P' && (row == 0 || row == 7)){
-		 
+
 		 block[row][col].setUnit(name); //change block value
-		
+
 		 history.push_back("4" + before.substr(3, 2) + before.substr(3, 2) + before.substr(5, 2) + name); //add to history
 	 }
 

@@ -7,9 +7,7 @@
 #include <vector>
 #include "Board.h"
 
-
 Bishop::Bishop(int row, int col, bool isWhite){
-
 	 this->row = row;
 	 this->col = col;
 	 this->isWhite = isWhite;
@@ -26,12 +24,12 @@ Bishop::Bishop(int row, int col, bool isWhite){
  std::vector<int> Bishop::canMove(){
 	 std::vector<int> movement;
 	 Block** board = Board::block;
-	 
+
 	 board[row][col].setItHasUnit(false);//remove from board to check movements
 
 	 for (int i = 0; i < 4; i++)
 	 {
-		 
+
 		 for (int j = 1; j < 8; j++){
 			 int k = 0;
 			 int p = 0;
@@ -57,9 +55,9 @@ Bishop::Bishop(int row, int col, bool isWhite){
 				if (this->isOutBounds(k, p)){
 					break;
 				}
-				else{ 
+				else{
 					if (board[k][p].ithasUnit() ){
-						
+
 						if (Board::checkIfUnitCanMove(k,p)){
 							movement.push_back(k);
 							movement.push_back(p);
@@ -72,7 +70,7 @@ Bishop::Bishop(int row, int col, bool isWhite){
 					}
 				}
 		 }
-		
+
 
 	 }
 

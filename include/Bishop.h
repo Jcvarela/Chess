@@ -6,13 +6,11 @@
 #include <vector>
 
 class Bishop: public Unit{
-public:
-	Bishop(int row, int col, bool isWhite);
-	Bishop();
-	std::vector<int> canMove();
-	
+	public:
+		Bishop(int row, int col, bool isWhite);
+		Bishop();
+
+		std::vector<int> canMove();
 };
-
-
 
 #endif

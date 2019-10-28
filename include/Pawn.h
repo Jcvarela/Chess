@@ -6,15 +6,11 @@
 #include <vector>
 
 class Pawn: public Unit{
+	public:
+		Pawn(int row, int col, bool isWhite);
+		Pawn();
 
-public:
-	Pawn(int row, int col, bool isWhite);
-	Pawn();
-
-	std::vector<int> canMove(); //overide function 
-
+		std::vector<int> canMove();
 };
-
-
 
 #endif

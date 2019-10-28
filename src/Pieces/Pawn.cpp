@@ -32,21 +32,21 @@
 	 this->name = "WP";
  }
 
- 
+
  //This function returns a vector with all posible movements of this specific pawn
  std::vector<int> Pawn::canMove(){
 
-	 // every two elements will be compose of row and col so peon has 4 movments 
+	 // every two elements will be compose of row and col so peon has 4 movments
 	 //{-1,0, -2,0, -1,-1, -1,1}
-	 std::vector<int> movement;  // return this value            
-	 
+	 std::vector<int> movement;  // return this value
+
 	 //Block is a static array in the Board class
 	 //doing this will alow you to get all the information from the board
-	 Block** board = Board::block; 
+	 Block** board = Board::block;
 
 	 board[row][col].setItHasUnit(false);//remove from board to check movements
 
-	 int mult = (this->isWhite ? 1 : -1); 
+	 int mult = (this->isWhite ? 1 : -1);
 
 
 
@@ -60,8 +60,8 @@
 	 }
 
 	 //Checks if pawn can move to the block in front of it (two spaces)
-	 if ((isWhite && row == 6 || !isWhite && row == 1) && !board[row + (-2)*mult][col].ithasUnit() && !board[row + (-1)*mult][col].ithasUnit()){
-		 
+	 if (( (isWhite && row == 6) || (!isWhite && row == 1)) && !board[row + (-2)*mult][col].ithasUnit() && !board[row + (-1)*mult][col].ithasUnit()){
+
 
 		 if (Board::checkIfUnitCanMove(row + (-2)*mult, col)){
 			 movement.push_back(row + (-2)*mult);
@@ -72,7 +72,7 @@
 	 }
 	 //Checks if pawn can move/attack to the diagonal (right block)
 	 if (!this->isOutBounds(row + (-1)*mult, col + 1) && board[row + (-1)*mult][col + 1].ithasUnit() && (this->isWhite != board[row + (-1)*mult][col + 1].getUnit()->isItWhite())){
-		
+
 
 		 if (Board::checkIfUnitCanMove(row + (-1)*mult, col + 1)){
 			 movement.push_back(row + (-1)*mult);
@@ -81,14 +81,14 @@
 	 }
 	 //Checks if pawn can move/attack to the diagonal (left block)
 	 if (!this->isOutBounds(row + (-1)*mult, col - 1) && board[row + (-1)*mult][col - 1].ithasUnit() && (this->isWhite != board[row + (-1)*mult][col - 1].getUnit()->isItWhite())){
-		
+
 
 		 if (Board::checkIfUnitCanMove(row + (-1)*mult, col - 1)){
 			 movement.push_back(row + (-1)*mult);
 			 movement.push_back(col - 1);
 		 }
 	 }
-	 
+
 
 
 	 //check peon al paso
@@ -119,6 +119,6 @@
 	 board[row][col].setItHasUnit(true); //put unit back in the baord
 	 return movement;
  }
- 
+
 
 #endif
