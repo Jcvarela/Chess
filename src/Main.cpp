@@ -28,7 +28,7 @@ static Board board;
 int main(){
 
 	while(scene != 2){
-		
+
 		switch(scene){
 		case startPage:
 			start();
@@ -58,8 +58,8 @@ void start(){
 	title+= "\t\t ####                ####               \n";
 	title+= "\t\t ####      ####      ####               \n";
 	title+= "\t\t #### #### ####      ####               \n";
-	
-	
+
+
 	title += "\n\n\n\t\t\t\t";
 	title += "Options:\n";
 	title += "\t\t\t\t";
@@ -67,7 +67,7 @@ void start(){
 	title += "\t\t\t\t";
 	title += "2->Exit\n";
 
-	std::cout << title; 
+	std::cout << title;
 	std::cin >> scene;
 
 }
@@ -83,9 +83,9 @@ void wrongInput(){
 	title+= "\t\t ####                ####               \n";
 	title+= "\t\t ####      ####      ####               \n";
 	title+= "\t\t #### #### ####      ####               \n";
-	
-	
-	
+
+
+
 
 
 	title += "\n\n\n\t\t";
@@ -104,8 +104,12 @@ void wrongInput(){
 //play method
 void play(){
 
-	std::getline(std::cin, std::string()); //get rid of the first line
+	// std::getline(std::cin, std::string()); //get rid of the first line
+	// std::cin >> string();
+	// board = Board();
+	// scene = startPage;
 	board = Board();
+	board.InitializeBoard();
 	scene = startPage;
 
 	std::string from = "", to = "";
@@ -121,7 +125,7 @@ void play(){
 
 	while (from.compare("-1") != 0 && to.compare("-1")){
 		system("cls"); //clear screen
-		
+
 		kingBeenAttack = Board::isYourKingBeenAttack();
 		currentPlayerCanMove = Board::checkIfPlayerHaveMovement();
 
@@ -149,7 +153,7 @@ void play(){
 			Board::moveTo(frow, fcol, trow, tcol);
 
 			if (Board::block[trow][tcol].getUnit()->getName().at(1) == 'P' && (trow == 0 || trow == 7)){ //Peon got promoted
-				 
+
 				Board::setPromotion( (Board::playerOneTurn? "W":"B") + choosePromotion() );
 			}
 
@@ -172,9 +176,9 @@ std::string printInfo(std::string &extra, bool skipFrom, bool kingBeenAttack, bo
 	output +=  "\t\t\t";
 	output +=  (board.playerOneTurn ? "White Turn:\n" : "Black Turn:\n");
 	output += "\t\t\t-1 Go to Main Menu\n";
-	
+
 	if (Board::history.size() != 0){ 	output += "\t\t\t-3 Go back\n"; 	}
-	
+
 	if (!currentPlayerCanMove){
 
 		if (kingBeenAttack){
@@ -208,15 +212,16 @@ std::string printInfo(std::string &extra, bool skipFrom, bool kingBeenAttack, bo
 	return output;
 }
 
-//get the input values from 
-//false if input is invalid 
+//get the input values from
+//false if input is invalid
 //true  if input is valid
 bool checkFrom(int &frow, int &fcol, std::string &from, std::string &extra, bool currentPlayerCanMove){
 
 
 
 	std::cout << "From -> ";
-	std::getline(std::cin, from); //gets the line
+	// std::getline(std::cin, from); //gets the line
+	std::cin >> from;
 
 	if (from.compare("-1") == 0){
 		return false;
@@ -245,7 +250,7 @@ bool checkFrom(int &frow, int &fcol, std::string &from, std::string &extra, bool
 		return false;
 	}
 
-	
+
 	if (!validInput(from, &frow, &fcol)){
 		extra = from + "is an invalid Input. Must be a number(1 - 7) and a character (a - h)\n";
 		return false;
@@ -256,17 +261,18 @@ bool checkFrom(int &frow, int &fcol, std::string &from, std::string &extra, bool
 		extra = "You don't have any units at "+ from+"\n";
 		return false;
 	}
-	
+
 	return true;
 }
 
 
-//get the input value to 
-//false if input is invalid 
+//get the input value to
+//false if input is invalid
 //true if input is valid
 bool checkTo(int &tcol, int &trow, std::string &to, std::string &extra, std::vector<int> movement, bool &skipFrom, std::string from){
 	std::cout << "To   -> ";
-	std::getline(std::cin, to);
+	// std::getline(std::cin, to);
+	std::cin >> to;
 
 	if (to.compare("-1") == 0){ // go back to main menu
 		return false;
@@ -277,7 +283,7 @@ bool checkTo(int &tcol, int &trow, std::string &to, std::string &extra, std::vec
 		return false;
 	}
 
-	if (to.compare("-3") == 0){ 
+	if (to.compare("-3") == 0){
 		if (Board::history.size() == 0){ // cant go back
 			extra = "Invalid Option\n";
 		}
@@ -304,7 +310,7 @@ bool checkTo(int &tcol, int &trow, std::string &to, std::string &extra, std::vec
 }
 
 
-//check if position row and col are in vector of movment 
+//check if position row and col are in vector of movment
 bool contains(std::vector<int> movement, int row, int col){
 
 	for (unsigned int i = 0; i < movement.size(); i +=2){
@@ -320,7 +326,7 @@ bool contains(std::vector<int> movement, int row, int col){
 
 
 //invalid input if return false
-//also sets the value of row and col if is true 
+//also sets the value of row and col if is true
 bool validInput(std::string input,int *row,int *col){
 
 	if(input.length() != 2){
@@ -328,13 +334,13 @@ bool validInput(std::string input,int *row,int *col){
 	}
 
 	*row = input.at(1) - '1';
-	
+
 	if(*row < 0 || *row > 7){
 
 		*row = input.at(0) - '1';
 		if(*row < 0 || *row > 7){
 			return false;
-		} 
+		}
 		else {
 			*col = input.at(1) - 'a';
 
@@ -344,7 +350,7 @@ bool validInput(std::string input,int *row,int *col){
 				if(*col < 0 || *col >7)
 					return false;
 				else return true;
-			} 
+			}
 			else return true;
 		}
 	} else {
@@ -357,7 +363,7 @@ bool validInput(std::string input,int *row,int *col){
 				if(*col < 0 || *col >7)
 					return false;
 				else return true;
-			} 
+			}
 			else return true;
 	}
 
@@ -368,7 +374,7 @@ bool validInput(std::string input,int *row,int *col){
 //given an array of numbers { 5,2 7,1 ... } prints the position in forms of a letter an a number
 //exp 0,0, -> A1 and 5,2 -> C6
 void printMovement(std::vector<int> movement){
-	
+
 	std::string value = "";
 	for (unsigned int i = 0; i < movement.size(); i += 2){
 		switch (movement[i + 1]){
@@ -421,7 +427,8 @@ std::string choosePromotion(){
 		std::cout << "\n\tB for Bishop ";
 		std::cout << "\n\tN for Knight ";
 
-		std::getline(std::cin, input);
+		// std::getline(std::cin, input);
+		std::cin >> input;
 
 		if (input.compare("Q") == 0){ check = false; }
 		else if (input.compare("R") == 0) { check = false; }

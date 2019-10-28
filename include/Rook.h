@@ -7,15 +7,12 @@
 #include <string>
 
 class Rook: public Unit{
-public:
-	Rook(int row, int col, bool isWhite);
-	Rook();
+	public:
+		Rook(int row, int col, bool isWhite);
+		Rook();
 
-	std::vector<int> Rook::canMove();
-	bool hasEnemy(Block *b);
-
+		std::vector<int> canMove();
+		bool hasEnemy(Block *b);
 };
-
-
 
 #endif

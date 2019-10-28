@@ -7,14 +7,12 @@
 #include "Block.h"
 
 class Queen: public Unit{
-public:
-	Queen(int row, int col, bool isWhite);
-	Queen();
+	public:
+		Queen(int row, int col, bool isWhite);
+		Queen();
 
-	std::vector<int> canMove();
-	bool hasEnemy(Block *b);
+		std::vector<int> canMove();
+		bool hasEnemy(Block *b);
 };
-
-
 
 #endif
